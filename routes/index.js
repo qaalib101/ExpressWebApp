@@ -28,8 +28,8 @@ router.get('/convert', function(req, res, next) {
 router.get('/about', function(req, res, next){
   res.render('about', {
     name: "Qaalib Farah",
-      description: "This site is used to convert US " +
-      "dollars into foreign currency"})
+      description: "This site is used to convert currency " +
+      "into foreign currency"})
 });
 
 module.exports = router;
