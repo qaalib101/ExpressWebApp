@@ -8,18 +8,20 @@ router.get('/', function(req, res, next) {
 });
 /*Get the conversion result page*/
 router.get('/convert', function(req, res, next) {
+  //amount of currency
   var currency_amount = req.query.currency_amount;
+  // to and from rates
   var to_rate = req.query.to_currency;
   var from_rate = req.query.from_currency;
-  var fromCurrency = from_rate.textContent;
-  var rate = to_rate.toString() + "to" + from_rate.toString();
+  // connect strings to get the currency rate from the currencydb file
+  var rate = from_rate.toString() + "to" + to_rate.toString();
   var converted = currency_amount * exchangeRates[rate];
 
   res.render('results', {
     currency: currency_amount,
-      type: fromCurrency,
+      fromCurrency: from_rate,
       toCurrency: to_rate,
-      converted:converted
+      converted: converted
   });
 });
 /*get the about page*/
