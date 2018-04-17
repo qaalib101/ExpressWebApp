@@ -13,9 +13,12 @@ router.get('/convert', function(req, res, next) {
   // to and from rates
   var to_rate = req.query.to_currency;
   var from_rate = req.query.from_currency;
-  // connect strings to get the currency rate from the currencydb file
-  var rate = from_rate.toString() + "to" + to_rate.toString();
-  var converted = currency_amount * exchangeRates[rate];
+  // connect to API pass rates in function
+  var conversionObject = exchangeRates(from_rate,to_rate);
+  console.log(JSON.parse(conversionObject));
+
+  var rate = JSON.parse(conversionObject.rates.to_rate);
+  var converted = currency_amount * rate;
 
   res.render('results', {
     currency: currency_amount,
