@@ -14,19 +14,27 @@ router.get('/convert', function(req, res, next) {
   var to_rate = req.query.to_currency;
   var from_rate = req.query.from_currency;
   // connect to API pass rates in function
-  var conversionObject = exchangeRates(from_rate,to_rate);
-  console.log(JSON.parse(conversionObject));
+   exchangeRates(function(err, json) {
 
-  var rate = JSON.parse(conversionObject.rates.to_rate);
-  var converted = currency_amount * rate;
+          // handle JSON here.
+          console.log(JSON.parse(conversionObject));
 
-  res.render('results', {
-    currency: currency_amount,
-      fromCurrency: from_rate,
-      toCurrency: to_rate,
-      converted: converted
-  });
+          var rate = JSON.parse(conversionObject.rates.to_rate);
+
+          var converted = currency_amount * rate;
+
+          res.render('results', {
+              currency: currency_amount,
+              fromCurrency: from_rate,
+              toCurrency: to_rate,
+              converted: converted
+          });
+      }
+      , from_rate,to_rate);
+
 });
+
+
 /*get the about page*/
 router.get('/about', function(req, res, next){
   res.render('about', {
