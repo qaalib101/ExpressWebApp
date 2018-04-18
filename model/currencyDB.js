@@ -9,7 +9,7 @@ function currencyRequest(callback, base, to) {
                                     //When it's done, it will use the callback to notify the caller that it's done.
 
         // TODO include your API key in the query parameters
-        queryParam = { 'base': base,  'symbols': to, 'access_key': 'e01970f33b001da0927c8c7dfa13fea1'};
+        queryParam = { 'base': base,  'symbols': to, 'access_key': '4a8b8ee221c33507f194fb3b687d6a83'};
 
         //Use request module to request currency data from Fixer API
         //Must handle result in callback. Can't return data from an asychronous function.

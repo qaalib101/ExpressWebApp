@@ -8,20 +8,28 @@ router.get('/', function(req, res, next) {
 });
 /*Get the conversion result page*/
 router.get('/convert', function(req, res, next) {
-  //amount of currency
-  var currency_amount = req.query.currency_amount;
-  // to and from rates
-  var to_rate = req.query.to_currency;
-  var from_rate = req.query.from_currency;
-  // connect to API pass rates in function
+    var to_rate = req.query.to_currency;
+    var from_rate = req.query.from_currency;
    exchangeRates(function(err, json) {
 
           // handle JSON here.
-          console.log(JSON.parse(conversionObject));
-
-          var rate = JSON.parse(conversionObject.rates.to_rate);
+          console.log(json);
+           //amount of currency
+           var currency_amount = req.query.currency_amount;
+           // to and from rates
+           var to_rate = req.query.to_currency;
+           var from_rate = req.query.from_currency;
+           // connect to API pass rates in function
+       var rate;
+       // if the rates are the same the rate will equal 1
+       if(to_rate == from_rate){
+           rate = 1;
+       }else{
+           rate = json.rates[to_rate];
+       }
 
           var converted = currency_amount * rate;
+
 
           res.render('results', {
               currency: currency_amount,
